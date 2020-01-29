@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GithubUserService} from '../../services/github-user.service';
 import {GithubRepoService} from "../../services/repo.service";
+import {Repo} from '../../models/repos.types';
 
 @Component({
   selector: 'app-github-users',
@@ -8,6 +9,8 @@ import {GithubRepoService} from "../../services/repo.service";
   styleUrls: ['./github-users.component.css']
 })
 export class GithubUsersComponent implements OnInit {
+  repos: Repo[] = [];
+  currentPage = 1;
 
   constructor(
     private githubUserService: GithubUserService,
@@ -18,8 +21,18 @@ export class GithubUsersComponent implements OnInit {
     this.githubUserService.getUser('andriyor').subscribe(userData => {
       console.log(userData);
     });
-    this.githubRepoService.getPersonalRepos().subscribe(repos => {
+    this.githubRepoService.getPersonalRepos(this.currentPage).subscribe(repos => {
       console.log(repos);
+      this.repos = repos;
+    })
+  }
+
+  onScroll () {
+    console.log('scrolled down!!');
+    this.currentPage += 1;
+    this.githubRepoService.getPersonalRepos(this.currentPage).subscribe(repos => {
+      console.log(repos);
+      this.repos = [...this.repos, ...repos];
     })
   }
 

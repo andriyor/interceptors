@@ -1,0 +1,8 @@
+.stargazers-count {
+  margin: 5px;
+}
+
+.wrapper {
+  height: 500px;
+  overflow-y: scroll;
+}

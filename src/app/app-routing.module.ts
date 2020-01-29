@@ -14,7 +14,7 @@ import { HttpsComponent } from "./components/https.component";
 import { paths } from "./const";
 import { MatButtonModule } from "@angular/material/button";
 import {GithubUsersComponent} from "./components/github-users/github-users.component";
-import {MatListModule} from '@angular/material/list';
+import {IssuesComponent} from "./components/issues/issues.component";
 
 const routes: Routes = [
   { path: paths.auth, component: AuthComponent },
@@ -27,7 +27,8 @@ const routes: Routes = [
   // { path: paths.loader, component: LoaderComponent },
   { path: paths.profiler, component: ProfilerComponent },
   { path: paths.notify, component: NotifyComponent },
-  { path: paths.github, component: GithubUsersComponent }
+  { path: paths.github, component: GithubUsersComponent },
+  { path: paths.issues, component: IssuesComponent }
 ];
 
 @NgModule({
@@ -47,7 +48,6 @@ const routes: Routes = [
     CommonModule,
     MatButtonModule,
     RouterModule.forRoot(routes),
-    MatListModule
   ],
   exports: [
     AuthComponent,

@@ -1,5 +1,26 @@
-<mat-list role="list">
-  <mat-list-item role="listitem">Item 1</mat-list-item>
-  <mat-list-item role="listitem">Item 2</mat-list-item>
-  <mat-list-item role="listitem">Item 3</mat-list-item>
-</mat-list>
+<div  class="wrapper">
+  <div
+      class="search-results"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()"
+      [fromRoot]="true"
+      [infiniteScrollContainer]="'.wrapper'"
+  >
+    <mat-list role="list" *ngIf="repos.length">
+      <mat-list-item *ngFor="let repo of repos">
+        <h3 matLine> {{repo.full_name}} </h3>
+        <p matLine>
+          <span> {{repo.language}} </span>
+          <ng-container *ngIf="repo.language && repo.description">
+            <span>--</span>
+          </ng-container>
+          <span> {{repo.description}} </span>
+        </p>
+        <mat-icon>stars</mat-icon>
+        <div class="stargazers-count">{{repo.stargazers_count}}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

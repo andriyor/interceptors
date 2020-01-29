@@ -9,6 +9,7 @@ export const paths = {
   convert: "convert",
   // loader: "loader",
   https: "https",
-  github: "github"
+  github: "github",
+  issues: "issues"
 };
 

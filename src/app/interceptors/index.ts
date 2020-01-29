@@ -10,6 +10,7 @@ import { ErrorInterceptor } from './error.interceptor';
 import { FakeInterceptor } from './fake.interceptor';
 import { LoaderInterceptor } from './loader.interceptor';
 import { ConvertInterceptor } from './convert.interceptor';
+import {ParamsInterceptor} from "./params.interceptor";
 
 export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -21,5 +22,6 @@ export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: HttpsInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: NotifyInterceptor, multi: true }
+  { provide: HTTP_INTERCEPTORS, useClass: NotifyInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ParamsInterceptor, multi: true }
 ];
