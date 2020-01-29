@@ -7,6 +7,7 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { paths } from "../const";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
@@ -14,12 +15,9 @@ export class HeaderInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes(paths.header)) {
-      return next.handle(req);
-    }
     console.warn("HeaderInterceptor");
 
-    const modified = req.clone({ setHeaders: { "X-Man": "Wolverine" } });
+    const modified = req.clone({ setHeaders: { "Authorization": `token ${environment.GITHUB_TOKEN}` } });
 
     return next.handle(modified);
   }

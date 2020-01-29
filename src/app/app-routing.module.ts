@@ -13,18 +13,21 @@ import { CommonModule } from "@angular/common";
 import { HttpsComponent } from "./components/https.component";
 import { paths } from "./const";
 import { MatButtonModule } from "@angular/material/button";
+import {GithubUsersComponent} from "./components/github-users/github-users.component";
+import {MatListModule} from '@angular/material/list';
 
 const routes: Routes = [
   { path: paths.auth, component: AuthComponent },
-  { path: paths.cache, component: CacheComponent },
+  // { path: paths.cache, component: CacheComponent },
   { path: paths.convert, component: ConvertComponent },
   { path: paths.error, component: ErrorComponent },
   { path: paths.fake, component: FakeComponent },
   { path: paths.header, component: HeaderComponent },
   { path: paths.https, component: HttpsComponent },
-  { path: paths.loader, component: LoaderComponent },
+  // { path: paths.loader, component: LoaderComponent },
   { path: paths.profiler, component: ProfilerComponent },
-  { path: paths.notify, component: NotifyComponent }
+  { path: paths.notify, component: NotifyComponent },
+  { path: paths.github, component: GithubUsersComponent }
 ];
 
 @NgModule({
@@ -40,7 +43,12 @@ const routes: Routes = [
     NotifyComponent,
     ProfilerComponent
   ],
-  imports: [CommonModule, MatButtonModule, RouterModule.forRoot(routes)],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    RouterModule.forRoot(routes),
+    MatListModule
+  ],
   exports: [
     AuthComponent,
     CacheComponent,

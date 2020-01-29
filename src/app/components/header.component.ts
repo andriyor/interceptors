@@ -11,6 +11,7 @@ export class HeaderComponent {
   constructor(private http: HttpClient) {}
 
   run() {
+    console.log(paths.header);
     this.http.get(paths.header).subscribe();
   }
 }

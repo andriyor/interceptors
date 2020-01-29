@@ -2,7 +2,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NotifyInterceptor } from './notify.interptor';
 import { HttpsInterceptor } from './https.interceptor';
-import { ProfilerInterceptor } from './profiler.interceptor';
+import { LoggingInterceptor } from './logging-interceptor.service';
 import { AuthInterceptor } from './auth.interceptor';
 import { CacheInterceptor } from './cache.interceptor';
 import { HeaderInterceptor } from './header.interceptor';
@@ -20,6 +20,6 @@ export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: HttpsInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-  { provide: HTTP_INTERCEPTORS, useClass: ProfilerInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: NotifyInterceptor, multi: true }
 ];

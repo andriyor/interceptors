@@ -12,7 +12,7 @@ import { ProfilerService } from "../services/profiler.service";
 import { paths } from "../const";
 
 @Injectable()
-export class ProfilerInterceptor implements HttpInterceptor {
+export class LoggingInterceptor implements HttpInterceptor {
   constructor(private profiler: ProfilerService) {}
 
   intercept(
