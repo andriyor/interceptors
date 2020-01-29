@@ -15,9 +15,10 @@ import { AppComponent } from "./app.component";
 import { httpInterceptorProviders } from "./interceptors";
 import { UserReposComponent } from './components/user-repos/user-repos.component';
 import { IssuesComponent } from './components/issues/issues.component';
+import { GenericInfiniteScrollComponent } from './components/generic-infinite-scroll/generic-infinite-scroll.component';
 
 @NgModule({
-  declarations: [AppComponent, UserReposComponent, IssuesComponent],
+  declarations: [AppComponent, UserReposComponent, IssuesComponent, GenericInfiniteScrollComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

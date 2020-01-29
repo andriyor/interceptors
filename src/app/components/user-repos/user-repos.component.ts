@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GithubRepoService} from "../../services/repo.service";
 import {Repo} from '../../models/repos.types';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-github-users',
@@ -10,6 +11,7 @@ import {Repo} from '../../models/repos.types';
 export class UserReposComponent implements OnInit {
   repos: Repo[] = [];
   currentPage = 1;
+  url = `${environment.apiUrl}/user/repos`;
 
   constructor(private githubRepoService: GithubRepoService) { }
 

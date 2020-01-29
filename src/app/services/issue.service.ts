@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from "rxjs";
-import {Repo} from "../models/repos.types";
+import {Issue} from "../models/issues.types";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class IssueService {
 
   constructor(private http: HttpClient) { }
 
-  getIssues(owner, repo): Observable<Repo[]>{
-    return this.http.get<Repo[]>(`${this.userUrl}/${owner}/${repo}/issues`);
+  getIssues(fullName, page=1): Observable<Issue[]>{
+    return this.http.get<Issue[]>(`${this.userUrl}/${fullName}/issues?page=${page}`);
   }
 }

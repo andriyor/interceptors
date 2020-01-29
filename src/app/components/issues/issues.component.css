@@ -1,5 +1,5 @@
 .users {
-  height: 250px;
+  height: 200px;
   overflow-y: auto;
   width: fit-content;
 }
@@ -8,7 +8,7 @@
   display: none !important;
 }
 
-.issues {
+.search {
   display: flex;
   flex-direction: row;
 }
@@ -18,7 +18,7 @@
   margin: 5px;
 }
 
-.repo-search {
+.wrapper {
   height: 200px;
   overflow-y: auto;
   margin-top: 60px;
@@ -27,4 +27,10 @@
 .repo:hover {
   cursor: pointer;
   background-color: aliceblue;
+}
+
+.issues {
+  height: 250px;
+  overflow-y: auto;
+  margin-top: 60px;
 }

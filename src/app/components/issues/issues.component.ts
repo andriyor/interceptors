@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {IssueService} from '../../services/issue.service';
 import {Subject} from "rxjs";
-import {debounceTime, distinctUntilChanged} from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, filter} from "rxjs/operators";
 import {SearchService} from '../../services/search.service';
 import {User} from "../../models/user.types";
 import {GithubRepoService} from '../../services/repo.service';
 import {Repo} from "../../models/repos.types";
+import {Issue} from "../../models/issues.types";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-issues',
@@ -17,43 +19,51 @@ export class IssuesComponent implements OnInit {
   users: User[] = [];
   userNameUpdate = new Subject<string>();
   userRepos: Repo[] = [];
-  currentReposPage = 1;
+  currentIssuesPage = 1;
+  issues: Issue[] = [];
+  selectedUserName: string;
+  selectedRepoName: string;
+  reposUrl: string;
 
   constructor(
     private issueService: IssueService,
-    private searchService: SearchService,
-    private githubRepoService: GithubRepoService
+    private searchService: SearchService
   ) {}
+
+  ngOnInit() {
+    this.userNameUpdate.pipe(
+      filter(Boolean),
+      debounceTime(800),
+      distinctUntilChanged())
+      .subscribe(value => {
+        this.updateUsers(value);
+      });
+  }
 
   updateUsers(userName) {
     this.searchService.users(userName).subscribe(users => {
       this.users = users['items'];
-      console.log(this.users);
     })
   }
 
   onUserSelect(userName) {
-    this.githubRepoService.getUserRepos(userName).subscribe(repos => {
-      this.userRepos = repos;
-      console.log(repos);
+    this.reposUrl = `${environment.apiUrl}/users/${userName}/repos`;
+  }
+
+  onRepoSelect(item) {
+    this.selectedRepoName = item.full_name;
+    this.issueService.getIssues(this.selectedRepoName).subscribe(issues => {
+      this.issues = issues;
     })
   }
 
-  ngOnInit() {
-    this.userNameUpdate.pipe(
-      debounceTime(400),
-      distinctUntilChanged())
-      .subscribe(value => {
-        this.updateUsers(value);
-        console.log(value);
-      });
-  }
-
-  onScroll () {
-    this.currentReposPage += 1;
-    this.githubRepoService.getPersonalRepos(this.currentReposPage).subscribe(repos => {
-      this.userRepos = [...this.userRepos, ...repos];
+  onIssuesScroll() {
+    console.log('onIssuesScroll');
+    this.currentIssuesPage += 1;
+    this.issueService.getIssues(this.selectedRepoName, this.currentIssuesPage).subscribe(issues => {
+      this.issues = [...this.issues, ...issues]
     })
+
   }
 
 }
