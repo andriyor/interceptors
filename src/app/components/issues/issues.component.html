@@ -1,1 +1,58 @@
-<p>issues works!</p>
+<div class="issues">
+  <div class="user-search">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput
+               placeholder="GitHub username"
+               value="Sushi"
+               name="userName"
+               id="userName"
+               [(ngModel)]="userName"
+               (ngModelChange)="this.userNameUpdate.next($event)"
+        >
+      </mat-form-field>
+    </form>
+    
+    <div class="users" *ngIf="users.length">
+      <mat-selection-list role="option">
+        <mat-list-option *ngFor="let user of users"
+                         (click)="onUserSelect(user.login)"
+        >
+          <img matListAvatar [attr.src]="user.avatar_url">
+          <h3 matLine> {{user.login}} </h3>
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+  </div>
+  
+  <div class="repo-search">
+    <div
+        class="search-results"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()"
+        [fromRoot]="true"
+        [infiniteScrollContainer]="'.repo-search'"
+    >
+      <mat-list role="list" *ngIf="userRepos.length">
+        <mat-list-item *ngFor="let repo of userRepos" class="repo">
+          <h3 matLine> {{repo.full_name}} </h3>
+          <p matLine>
+            <span> {{repo.language}} </span>
+            <ng-container *ngIf="repo.language && repo.description">
+              <span>--</span>
+            </ng-container>
+            <span> {{repo.description}} </span>
+          </p>
+          <ng-container *ngIf="repo.private">
+            <mat-icon>lock</mat-icon>
+          </ng-container>
+          <mat-icon>stars</mat-icon>
+          <div class="stargazers-count">{{repo.stargazers_count}}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>
+

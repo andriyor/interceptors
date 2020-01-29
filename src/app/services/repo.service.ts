@@ -15,4 +15,9 @@ export class GithubRepoService {
   getPersonalRepos(page): Observable<Repo[]>{
     return this.http.get<Repo[]>(`${this.userUrl}/user/repos?page=${page}`);
   }
+
+  getUserRepos(userName, page=1): Observable<Repo []> {
+    return this.http.get<Repo[]>(`${this.userUrl}/users/${userName}/repos?page=${page}`)
+  }
+
 }

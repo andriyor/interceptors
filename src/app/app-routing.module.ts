@@ -13,7 +13,7 @@ import { CommonModule } from "@angular/common";
 import { HttpsComponent } from "./components/https.component";
 import { paths } from "./const";
 import { MatButtonModule } from "@angular/material/button";
-import {GithubUsersComponent} from "./components/github-users/github-users.component";
+import {UserReposComponent} from "./components/user-repos/user-repos.component";
 import {IssuesComponent} from "./components/issues/issues.component";
 
 const routes: Routes = [
@@ -27,7 +27,7 @@ const routes: Routes = [
   // { path: paths.loader, component: LoaderComponent },
   { path: paths.profiler, component: ProfilerComponent },
   { path: paths.notify, component: NotifyComponent },
-  { path: paths.github, component: GithubUsersComponent },
+  { path: paths.github, component: UserReposComponent },
   { path: paths.issues, component: IssuesComponent }
 ];
 

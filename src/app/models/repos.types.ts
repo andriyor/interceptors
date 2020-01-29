@@ -4,4 +4,5 @@ export interface Repo {
   stargazers_count: number
   watchers_count:number
   language: string
+  private: boolean
 }

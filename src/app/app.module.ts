@@ -8,15 +8,16 @@ import { ToastrModule } from "ngx-toastr";
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { httpInterceptorProviders } from "./interceptors";
-import { GithubUsersComponent } from './components/github-users/github-users.component';
+import { UserReposComponent } from './components/user-repos/user-repos.component';
 import { IssuesComponent } from './components/issues/issues.component';
 
 @NgModule({
-  declarations: [AppComponent, GithubUsersComponent, IssuesComponent],
+  declarations: [AppComponent, UserReposComponent, IssuesComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -27,7 +28,9 @@ import { IssuesComponent } from './components/issues/issues.component';
     AppRoutingModule,
     MatListModule,
     MatIconModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
